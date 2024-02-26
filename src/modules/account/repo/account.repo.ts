@@ -1,14 +1,12 @@
-
-import prisma from '../../../../db/db';
+import client from '../../../../db/db';
 import { CreateAccountDto } from '../dto/create_account.dto';
 import { UpdateAccountDto } from '../dto/update_account.dto';
 import { CustomError } from '../../../utils/customHandler';
-import { Prisma, Account } from '@prisma/client';
-
+import { Prisma, Account } from'../../../../node_modules/.prisma/client';
 
 export = {
 	async findById(Id: string) {
-		return await prisma.account
+		return await client.account
 			.findUniqueOrThrow({
 				where: {
 					id: Id
@@ -33,7 +31,7 @@ export = {
 	},
 
 	async deleteById(Id: string) {
-		return await prisma.account
+		return await client.account
 			.delete({
 				where: {
 					id: Id
@@ -47,7 +45,7 @@ export = {
 	},
 
 	async createAccount(account: CreateAccountDto) {
-		const result = await prisma.account.findUnique({
+		const result = await client.account.findUnique({
 			where: {
 				email: account.email
 			},
@@ -65,7 +63,7 @@ export = {
 		if (result !== null) {
 			throw new CustomError('Email Already Registered', 500);
 		}
-		return await prisma.account.create({
+		return await client.account.create({
 			data: {
 				...account
 			}
@@ -73,7 +71,7 @@ export = {
 	},
 	async updateAccount(Id: string, accountData: UpdateAccountDto) {
 		await this.findById(Id);
-		return await prisma.account.update({
+		return await client.account.update({
 			where: {
 				id: Id
 			},
@@ -84,7 +82,7 @@ export = {
 	},
 
 	async findAllByLimit(limit: number) {
-		return await prisma.account.findMany({
+		return await client.account.findMany({
 			take: limit,
 			select: {
 				id: true,
@@ -99,7 +97,7 @@ export = {
 	},
 
 	async findByEmail(email: string): Promise<Account> {
-		return (await prisma.account
+		return (await client.account
 			.findUniqueOrThrow({
 				where: {
 					email: email

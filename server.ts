@@ -1,12 +1,12 @@
 import 'dotenv/config';
 import { app } from './app';
-import prisma from './db/db';
+import client from './db/db';
 
 const PORT = process.env.PORT || 4000;
 
 const startServer = async () => {
 	try {
-		await prisma.$queryRaw`SELECT 1`;
+		await client.$queryRaw`SELECT 1`;
 		app.listen(PORT);
 		console.log(`Server listening on port ${PORT}`);
 	} catch (error) {
@@ -17,7 +17,7 @@ const startServer = async () => {
 
 const handleShutdown = async () => {
 	console.log('Shutting down gracefully...');
-	await prisma.$disconnect();
+	await client.$disconnect();
 	process.exit(0);
 };
 
