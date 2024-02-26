@@ -1,8 +1,10 @@
-import { Account, Prisma } from '@prisma/client';
+
 import prisma from '../../../../db/db';
 import { CreateAccountDto } from '../dto/create_account.dto';
 import { UpdateAccountDto } from '../dto/update_account.dto';
 import { CustomError } from '../../../utils/customHandler';
+import { Prisma, Account } from '@prisma/client';
+
 
 export = {
 	async findById(Id: string) {
@@ -31,7 +33,7 @@ export = {
 	},
 
 	async deleteById(Id: string) {
-		return prisma.account
+		return await prisma.account
 			.delete({
 				where: {
 					id: Id

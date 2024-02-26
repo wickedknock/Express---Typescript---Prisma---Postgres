@@ -2,7 +2,7 @@ import { CreateAccountDto } from '../dto/create_account.dto';
 import { parseISO } from 'date-fns';
 import { UpdateAccountDto } from '../dto/update_account.dto';
 import accountRepo from '../repo/account.repo';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { LoginAccountDto } from '../dto/login_account.dto';
 import { CustomError } from '../../../utils/customHandler';
 import axios from 'axios';
