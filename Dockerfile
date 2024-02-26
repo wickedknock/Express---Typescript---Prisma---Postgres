@@ -9,6 +9,6 @@ RUN chmod +x /usr/bin/wait-for-it
 COPY . .
 EXPOSE 4000
 ENV NODE_ENV=production
-RUN chmod +x ./entrypoint.sh
+RUN chmod +x entrypoint.sh
 
 CMD ["./entrypoint.sh"]

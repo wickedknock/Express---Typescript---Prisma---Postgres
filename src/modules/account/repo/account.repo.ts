@@ -2,7 +2,7 @@ import client from '../../../../db/db';
 import { CreateAccountDto } from '../dto/create_account.dto';
 import { UpdateAccountDto } from '../dto/update_account.dto';
 import { CustomError } from '../../../utils/customHandler';
-import { Prisma, Account } from "@prisma/client"
+import { Prisma, Account } from '@prisma/client';
 
 export = {
 	async findById(Id: string) {
