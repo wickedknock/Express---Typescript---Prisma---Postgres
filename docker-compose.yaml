@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+    postgres:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+        ports:
+            - '5432:5432'
+
+    app:
+        build:
+            context: .
+        ports:
+            - '4000:4000'
+        depends_on:
+            - postgres
+        environment:
+            - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/test?schema=public&connection_limit=5
+            - SECRET=5HrEe3cigtdNUerigeebnoUKq0AuRbd9
+            - AUDIENCE=http://localhost:4000/account/list
+            - ISSUERBASE_URL=https://dev-g7md7buklw4prdgu.us.auth0.com/
+            - TOKENSIGNING_ALG=RS256
+            - AUTH0_URL=https://dev-g7md7buklw4prdgu.us.auth0.com/oauth/token
+            - CLIENT_ID=PJDVWoHwm4wKK49EDjWHG74C4ggx60Do
+            - CLIENT_SECRET=ua5jYxO7J9Y0WbH8H9nRlgenlaHP1PjW15wFpliAUsKOin0Kb0cNATho3bTwWcO6
+            - GRANT_TYPE=client_credentials

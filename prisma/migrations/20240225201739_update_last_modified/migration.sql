@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Account" ALTER COLUMN "last_modified" SET DEFAULT CURRENT_TIMESTAMP;
