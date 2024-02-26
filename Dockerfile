@@ -1,5 +1,5 @@
 
-FROM node:18.17.1-alpine
+FROM node:16.19.1-alpine
 RUN apk add --no-cache bash
 WORKDIR /app
 COPY package*.json ./
